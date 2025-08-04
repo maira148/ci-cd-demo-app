@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: new-app
+  template:
+    metadata:
+      labels:
+        app: new-app
+    spec:
+      containers:
+      - name: new-app
+        image: maira555/ci-cd-demo-app:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: new-service
+spec:
+  type: NodePort
+  selector:
+    app: new-app
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30008

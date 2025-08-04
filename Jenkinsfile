@@ -29,5 +29,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to K3s') {
+            steps {
+                script {
+                    sh 'kubectl apply -f new-deployment.yaml'
+                }
+            }
+        }
     }
 }
